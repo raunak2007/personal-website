@@ -48,7 +48,7 @@
 </head>
 <body>
 
-    <h1>Enter Something:</h1>
+    <h1>Enter your value for Fibonacci Memoization:</h1>
     <input type="text" id="inputField" placeholder="Type here">
     <button id="submitBtn" onclick="displayInput()">Submit</button>
     
@@ -58,7 +58,7 @@
         function displayInput() {
             var inputValue = document.getElementById("inputField").value;
             var resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = "You entered: " + inputValue;
+            resultDiv.innerHTML = inputValue;
 
             // Replace everything in the body with the result
             document.body.innerHTML = resultDiv.outerHTML;
