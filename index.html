@@ -6,10 +6,12 @@
     <title>Input Display</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Source Code Pro', monospace;
             text-align: center;
             margin: 50px;
             background-color: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         h1 {
@@ -48,7 +50,7 @@
 </head>
 <body>
 
-    <h1>Enter your value for Fibonacci Memoization:</h1>
+    <h1>Enter Something:</h1>
     <input type="text" id="inputField" placeholder="Type here">
     <button id="submitBtn" onclick="displayInput()">Submit</button>
     
@@ -60,8 +62,8 @@
             var resultDiv = document.getElementById("result");
             resultDiv.innerHTML = inputValue;
 
-            // Replace everything in the body with the result
-            document.body.innerHTML = resultDiv.outerHTML;
+            // Set the entire body content to the result and apply monospace font
+            document.body.innerHTML = "<div style='font-family: \"Source Code Pro\", monospace;'>" + resultDiv.outerHTML + "</div>";
         }
     </script>
 
