@@ -45,18 +45,31 @@
             font-size: 18px;
             font-weight: bold;
         }
+        #congratulatory-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+        }
+        #image {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Will You Be My Valentine?</h1>
         <!-- Replace 'image.jpg' with the actual path to your picture -->
-        <img src="https://media.discordapp.net/attachments/876953326850297866/1207501423558926427/image.png?ex=65dfe055&is=65cd6b55&hm=b816bec3567ab9429a202dcf4077f53b44df93608590451237e7ff56fa8c4087&=&format=webp&quality=lossless&width=1544&height=1018" alt="us together :)">
+        <img id="image" src="https://media.discordapp.net/attachments/876953326850297866/1207501423558926427/image.png?ex=65dfe055&is=65cd6b55&hm=b816bec3567ab9429a202dcf4077f53b44df93608590451237e7ff56fa8c4087&=&format=webp&quality=lossless&width=1544&height=1018" alt="us together :)">
     </header>
 
     <div id="main-content">
         <button id="left-button">YES</button>
         <button id="right-button">no</button>
+        <p id="response-text"></p>
+        <p id="congratulatory-message">Congratulations! You're making progress!</p>
     </div>
 
     <script>
@@ -84,6 +97,14 @@
             const computedStyle = getComputedStyle(leftButton);
             const currentSize = parseFloat(computedStyle.fontSize);
             leftButton.style.fontSize = `${currentSize + 50}px`;
+        });
+        leftButton.addEventListener('click', () => {
+            // Make the image smaller
+            const image = document.getElementById('image');
+            image.style.width = '200px'; // Adjust the width as needed
+
+            // Show congratulatory message
+            congratulatoryMessage.style.display = 'block';
         });
     </script>
 </body>
