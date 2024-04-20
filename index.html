@@ -41,9 +41,11 @@
 <button onclick="visualizeInsertionSort()">Insertion Sort</button>
 <button onclick="visualizeBubbleSort()">Bubble Sort</button>
 <button onclick="visualizeQuickSort()">Quick Sort</button>
+<div id="timeTaken"></div>
 
 <script>
   let array = [];
+  let startTime, endTime;
 
   // Generates a new random array and displays it
   function resetArray() {
@@ -71,6 +73,7 @@
 
   // Visualize selection sort
   async function visualizeSelectionSort() {
+    startTime = performance.now();
     for (let i = 0; i < array.length; i++) {
       let minIndex = i;
       for (let j = i + 1; j < array.length; j++) {
@@ -82,6 +85,8 @@
       await sleep(300); // Adjust the delay here
       displayArray();
     }
+    endTime = performance.now();
+    displayTimeTaken();
   }
 
   // Visualize merge sort
@@ -92,6 +97,7 @@
 
   // Visualize insertion sort
   async function visualizeInsertionSort() {
+    startTime = performance.now();
     for (let i = 1; i < array.length; i++) {
       let key = array[i];
       let j = i - 1;
@@ -103,10 +109,13 @@
       await sleep(300); // Adjust the delay here
       displayArray();
     }
+    endTime = performance.now();
+    displayTimeTaken();
   }
 
   // Visualize bubble sort
   async function visualizeBubbleSort() {
+    startTime = performance.now();
     let n = array.length;
     for (let i = 0; i < n - 1; i++) {
       for (let j = 0; j < n - i - 1; j++) {
@@ -117,10 +126,13 @@
         }
       }
     }
+    endTime = performance.now();
+    displayTimeTaken();
   }
 
   // Visualize quick sort
   async function visualizeQuickSort(start = 0, end = array.length - 1) {
+    startTime = performance.now();
     if (start >= end) {
         return;
     }
@@ -130,9 +142,12 @@
         visualizeQuickSort(start, index - 1),
         visualizeQuickSort(index + 1, end)
     ]);
-}
 
-async function partition(start, end) {
+    endTime = performance.now();
+    displayTimeTaken();
+  }
+
+  async function partition(start, end) {
     let pivotIndex = start;
     let pivotValue = array[end];
 
@@ -150,7 +165,13 @@ async function partition(start, end) {
     displayArray();
 
     return pivotIndex;
-}
+  }
+
+  // Display the time taken to sort
+  function displayTimeTaken() {
+    const timeTaken = document.getElementById("timeTaken");
+    timeTaken.innerHTML = `Time taken to sort: ${endTime - startTime} milliseconds`;
+  }
 
   // Initial array generation and display
   resetArray();
