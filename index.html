@@ -120,10 +120,37 @@
   }
 
   // Visualize quick sort
-  async function visualizeQuickSort() {
-    // Implementation of quick sort
-    // (not visualized in this example)
-  }
+  async function visualizeQuickSort(start = 0, end = array.length - 1) {
+    if (start >= end) {
+        return;
+    }
+
+    let index = await partition(start, end);
+    await Promise.all([
+        visualizeQuickSort(start, index - 1),
+        visualizeQuickSort(index + 1, end)
+    ]);
+}
+
+async function partition(start, end) {
+    let pivotIndex = start;
+    let pivotValue = array[end];
+
+    for (let i = start; i < end; i++) {
+        if (array[i] < pivotValue) {
+            [array[i], array[pivotIndex]] = [array[pivotIndex], array[i]];
+            pivotIndex++;
+            await sleep(300); // Adjust the delay here
+            displayArray();
+        }
+    }
+
+    [array[end], array[pivotIndex]] = [array[pivotIndex], array[end]];
+    await sleep(300); // Adjust the delay here
+    displayArray();
+
+    return pivotIndex;
+}
 
   // Initial array generation and display
   resetArray();
