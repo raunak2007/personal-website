@@ -1,108 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>will you be my valentine?</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-        header {
-            background-color: #ffcccc;
-            text-align: center;
-            padding: 20px 0;
-        }
-        #main-content {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        #left-button {
-            padding: 10px 20px;
-            background-color: #ff9999;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            text-align: center;
-        }
-        #right-button {
-            padding: 10px 20px;
-            background-color: #ff9999;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            text-align: center;
-        }
-        #response-text {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        #congratulatory-message {
-            display: none;
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: green;
-        }
-        #image {
-            max-width: 25%;
-            height: auto;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorting Algorithms Visualization</title>
+<style>
+  .array-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 20px;
+  }
+  .array-bar {
+    width: 20px;
+    margin: 0 1px;
+    background-color: teal;
+    display: inline-block;
+  }
+  .array-bar.sorted {
+    background-color: orange;
+  }
+  .array-bar.compare {
+    background-color: red;
+  }
+  .array-bar.swapped {
+    background-color: green;
+  }
+  button {
+    margin-top: 20px;
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>will you be my valentine?</h1>
-        <!-- Replace 'image.jpg' with the actual path to your picture -->
-        <img id="image" src="https://media.discordapp.net/attachments/876953326850297866/1207501423558926427/image.png?ex=65dfe055&is=65cd6b55&hm=b816bec3567ab9429a202dcf4077f53b44df93608590451237e7ff56fa8c4087&=&format=webp&quality=lossless&width=1544&height=1018" alt="us together :)">
-    </header>
+<h1>Sorting Algorithms Visualization</h1>
+<div class="array-container" id="arrayContainer"></div>
+<button onclick="resetArray()">Generate New Array</button>
+<button onclick="visualizeSelectionSort()">Selection Sort</button>
+<button onclick="visualizeMergeSort()">Merge Sort</button>
+<button onclick="visualizeInsertionSort()">Insertion Sort</button>
+<button onclick="visualizeBubbleSort()">Bubble Sort</button>
+<button onclick="visualizeQuickSort()">Quick Sort</button>
 
-    <div id="main-content">
-        <button id="left-button">YES</button>
-        <button id="right-button">no</button>
-        <p id="response-text"></p>
-        <p id="congratulatory-message">ilysm 🫶🏽</p>
-    </div>
+<script>
+  let array = [];
 
-    <script>
-        const leftButton = document.getElementById('left-button');
-        const rightButton = document.getElementById('right-button');
+  // Generates a new random array and displays it
+  function resetArray() {
+    const arraySize = 20; // Change array size here
+    array = Array.from({length: arraySize}, () => Math.floor(Math.random() * 100) + 1);
+    displayArray();
+  }
 
-        const phrases = [
-            "are you sure?",
-            "maybe think again...",
-            "can’t be fr",
-            "you’re being silly",
-            "reconsider?",
-            "ugh still no???",
-            "is that your final answer, pookie?"
-        ];
+  // Displays the current array
+  function displayArray() {
+    const arrayContainer = document.getElementById("arrayContainer");
+    arrayContainer.innerHTML = "";
+    array.forEach((value) => {
+      const bar = document.createElement("div");
+      bar.className = "array-bar";
+      bar.style.height = `${value * 3}px`;
+      arrayContainer.appendChild(bar);
+    });
+  }
 
-        let currentIndex = 0;
+  // Helper function to delay execution
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
-        rightButton.addEventListener('click', () => {
-            // Change the text of the right button
-            rightButton.textContent = phrases[currentIndex];
-            currentIndex = (currentIndex + 1) % phrases.length;
+  // Visualize selection sort
+  async function visualizeSelectionSort() {
+    for (let i = 0; i < array.length; i++) {
+      let minIndex = i;
+      for (let j = i + 1; j < array.length; j++) {
+        if (array[j] < array[minIndex]) {
+          minIndex = j;
+        }
+      }
+      [array[i], array[minIndex]] = [array[minIndex], array[i]];
+      await sleep(300); // Adjust the delay here
+      displayArray();
+    }
+  }
 
-            // Increase the size of the left button
-            const computedStyle = getComputedStyle(leftButton);
-            const currentSize = parseFloat(computedStyle.fontSize);
-            leftButton.style.fontSize = `${currentSize + 50}px`;
-        });
-        leftButton.addEventListener('click', () => {
-            leftButton.textContent="yayy ilysm 🫶🏽🫶🏽🫶🏽";
-        });
-    </script>
+  // Visualize merge sort
+  async function visualizeMergeSort() {
+    // Implementation of merge sort
+    // (not visualized in this example)
+  }
+
+  // Visualize insertion sort
+  async function visualizeInsertionSort() {
+    for (let i = 1; i < array.length; i++) {
+      let key = array[i];
+      let j = i - 1;
+      while (j >= 0 && array[j] > key) {
+        array[j + 1] = array[j];
+        j = j - 1;
+      }
+      array[j + 1] = key;
+      await sleep(300); // Adjust the delay here
+      displayArray();
+    }
+  }
+
+  // Visualize bubble sort
+  async function visualizeBubbleSort() {
+    let n = array.length;
+    for (let i = 0; i < n - 1; i++) {
+      for (let j = 0; j < n - i - 1; j++) {
+        if (array[j] > array[j + 1]) {
+          [array[j], array[j + 1]] = [array[j + 1], array[j]];
+          await sleep(300); // Adjust the delay here
+          displayArray();
+        }
+      }
+    }
+  }
+
+  // Visualize quick sort
+  async function visualizeQuickSort() {
+    // Implementation of quick sort
+    // (not visualized in this example)
+  }
+
+  // Initial array generation and display
+  resetArray();
+</script>
 </body>
 </html>
