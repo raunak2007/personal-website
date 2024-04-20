@@ -85,7 +85,7 @@
         }
       }
       [array[i], array[minIndex]] = [array[minIndex], array[i]];
-      await sleep(300); // Adjust the delay here
+      await sleep(100); // Adjust the delay here
       displayArray();
     }
     endTime = performance.now();
@@ -110,7 +110,7 @@
         j = j - 1;
       }
       array[j + 1] = key;
-      await sleep(300); // Adjust the delay here
+      await sleep(100); // Adjust the delay here
       displayArray();
     }
     endTime = performance.now();
@@ -126,7 +126,7 @@
       for (let j = 0; j < n - i - 1; j++) {
         if (array[j] > array[j + 1]) {
           [array[j], array[j + 1]] = [array[j + 1], array[j]];
-          await sleep(300); // Adjust the delay here
+          await sleep(100); // Adjust the delay here
           displayArray();
         }
       }
@@ -161,13 +161,13 @@
         if (array[i] < pivotValue) {
             [array[i], array[pivotIndex]] = [array[pivotIndex], array[i]];
             pivotIndex++;
-            await sleep(300); // Adjust the delay here
+            await sleep(100); // Adjust the delay here
             displayArray();
         }
     }
 
     [array[end], array[pivotIndex]] = [array[pivotIndex], array[end]];
-    await sleep(300); // Adjust the delay here
+    await sleep(100); // Adjust the delay here
     displayArray();
 
     return pivotIndex;
